@@ -13,6 +13,8 @@ public class scaleRequestDTO {
 
     private ArrayList<String> names;
 
+    private ArrayList<String> daysOfWeek;
+
     private int month;
 
     private int year;

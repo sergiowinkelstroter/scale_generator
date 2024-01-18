@@ -19,6 +19,7 @@ import br.com.sergiowink.scale_generator.models.Scale;
 import br.com.sergiowink.scale_generator.models.ScaleNames;
 import br.com.sergiowink.scale_generator.repositories.ScaleNamesRepository;
 import br.com.sergiowink.scale_generator.repositories.ScaleRepository;
+import br.com.sergiowink.scale_generator.utils.ConvertStringsToDayOfWeek;
 import br.com.sergiowink.scale_generator.utils.ExactDays;
 import br.com.sergiowink.scale_generator.utils.QuantityNames;
 import jakarta.transaction.Transactional;
@@ -44,12 +45,13 @@ public class CreateScaleService {
 
         int quantityNames = QuantityNames.getQuantityNames(type);
 
+        List<String> daysOfWeekStrings = scale.getDaysOfWeek();
+        List<DayOfWeek> daysOfWeek = ConvertStringsToDayOfWeek.convertStringsToDayOfWeek(daysOfWeekStrings);
 
-        DayOfWeek[] daysToCount = {DayOfWeek.SATURDAY, DayOfWeek.SUNDAY, DayOfWeek.WEDNESDAY};
 
         Map<DayOfWeek, List<ScaleNames>> mapDaysNames = new HashMap<>();
 
-        for (DayOfWeek day : daysToCount) {
+        for (DayOfWeek day : daysOfWeek) {
             List<LocalDate> days = ExactDays.getExactDays(yearMonth, day);
 
             List<String> names = scale.getNames();
@@ -96,4 +98,6 @@ public class CreateScaleService {
 
         return scaleEntity;
     }
+
+
 }
