@@ -10,7 +10,7 @@ import lombok.Data;
 public class scaleRequestDTO {
     
     private String title;
-
+ 
     private ArrayList<String> names;
 
     private ArrayList<String> daysOfWeek;
